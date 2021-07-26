@@ -16,5 +16,10 @@
   "bugs": {
     "url": "https://github.com/RenanCS/react_typescript_tdd_clean_code/issues"
   },
-  "homepage": "https://github.com/RenanCS/react_typescript_tdd_clean_code#readme"
+  "homepage": "https://github.com/RenanCS/react_typescript_tdd_clean_code#readme",
+  "devDependencies": {
+    "@types/node": "^16.4.3",
+    "git-commit-msg-linter": "^3.2.6",
+    "typescript": "^4.3.5"
+  }
 }
