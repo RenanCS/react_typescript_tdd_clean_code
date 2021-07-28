@@ -2,6 +2,7 @@
 import { HttpStatusCode } from "@/data/protocols/http/http-response";
 import { HttpPostClientMock } from "@/data/test/mock-http-client";
 import { InvalidCredencialErro } from "@/domain/errors/invalid-credentials-error";
+import { UnexpectedError } from "@/domain/errors/unexpecte-error";
 import { mockAuthentication } from "@/domain/test/mock-authentication";
 import faker from 'faker';
 import { RemoteAuthentication } from "./remote-authentication";
@@ -43,6 +44,15 @@ describe('RemoteAuthentication', () => {
         }
         const promise =  sut.auth(mockAuthentication());
         expect(promise).rejects.toThrow(new InvalidCredencialErro());
+    })
+
+    test('Should throw unexpectedError if HttpPostClient return 400', () => {
+        const { sut, httpPostClientMock } = makeSutFactory();
+        httpPostClientMock.response = {
+            statusCode: HttpStatusCode.badRequest
+        }
+        const promise =  sut.auth(mockAuthentication());
+        expect(promise).rejects.toThrow(new UnexpectedError());
     })
 })
 
