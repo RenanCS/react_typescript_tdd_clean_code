@@ -1,7 +1,6 @@
-import { HttpPostClient, HttpPostParams } from "@/data/protocols/http/http-post-client";
-import { HttpResponse, HttpStatusCode } from "@/data/protocols/http/http-response";
+import { HttpPostClient, HttpPostParams, HttpResponse, HttpStatusCode } from "@/data/protocols/http";
 
-export  class HttpPostClientMock<T,R> implements HttpPostClient<T,R> {
+export class HttpPostClientMock<T, R> implements HttpPostClient<T, R> {
     url?: string;
     body?: T;
     response: HttpResponse<R> = {

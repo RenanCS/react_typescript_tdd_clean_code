@@ -1,11 +1,10 @@
 
-import { HttpStatusCode } from "@/data/protocols/http/http-response";
-import { HttpPostClientMock } from "@/data/test/mock-http-client";
-import { InvalidCredencialErro } from "@/domain/errors/invalid-credentials-error";
-import { UnexpectedError } from "@/domain/errors/unexpecte-error";
-import { AccountModel } from "@/domain/models/account-model";
-import { mockAuthentication } from "@/domain/test/mock-authentication";
-import { AuthenticationParams } from "@/domain/usecases/authentications";
+import { HttpStatusCode } from "@/data/protocols/http";
+import { HttpPostClientMock } from "@/data/test";
+import { InvalidCredencialErro,UnexpectedError } from "@/domain/errors";
+import { AccountModel } from "@/domain/models";
+import { mockAccountModel, mockAuthentication } from "@/domain/test";
+import { AuthenticationParams } from "@/domain/usecases";
 import faker from 'faker';
 import { RemoteAuthentication } from "./remote-authentication";
 
@@ -73,6 +72,17 @@ describe('RemoteAuthentication', () => {
         }
         const promise =  sut.auth(mockAuthentication());
         expect(promise).rejects.toThrow(new UnexpectedError());
+    })
+
+    test('Should return an AccountModel if HttpPostClient return 200', async () => {
+        const { sut, httpPostClientMock } = makeSutFactory();
+        const httpResult = mockAccountModel();
+        httpPostClientMock.response = {
+            statusCode: HttpStatusCode.ok,
+            body: httpResult
+        }
+        const account = await sut.auth(mockAuthentication());
+        expect(account).toEqual(httpResult);
     })
 })
 
