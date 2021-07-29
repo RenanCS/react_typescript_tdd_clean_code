@@ -4,7 +4,8 @@
         "es2021": true
     },
     "extends": [
-        "standard-with-typescript"
+        "standard-with-typescript",
+        "plugin:react/recommended"
     ],
     "parser": "@typescript-eslint/parser",
     "parserOptions": {
@@ -44,6 +45,9 @@
         "react/jsx-props-no-spreading": "off",
         "react/prop-types": "off",
         "react-hooks/rules-of-hooks": "error",
+        "react/react-in-jsx-scope": "off",
+        "react/jsx-uses-react": "error",
+        "react/jsx-uses-var": "error",
         "react-hooks/exhaustive-deps": "warn",
         "react/jsx-filename-extension": [
             1,
@@ -60,7 +64,6 @@
         "@typescript-eslint/consistent-type-definitions": "off",
         "@typescript-eslint/strinct-boolean-expressions": "off",
         "@typescript-eslint/ban-types": "off",
-        "react/react-in-jsx-scope": "off",
         "import/no-duplicates": "off",
         "import/extensions": [
             "error",
@@ -78,6 +81,9 @@
         ]
     },
     "settings": {
+        "react": {
+            "version": "detect"
+        },
         "import/resolver": {
             "typescript": {}
         }
